@@ -1,13 +1,13 @@
 services:
 
-#  mongodb:
-#    image: mongo:7
-#    ports:
-#      - "27017:27017"
-#    volumes:
-#      - mongo_data:/data/db
-#    environment:
-#      MONGO_DB:
+  mongodb:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_DB: week18_redis
 
 
   redis:
@@ -26,13 +26,14 @@ services:
     depends_on:
       - redis
 
-#  consumer:
-#    build: consumer
-#    environment:
-#      - MONGO_URI=mongodb://mongodb:27017
-#      - REDIS_HOST=redis
-#    depends_on:
-#      - redis
+  consumer:
+    build: consumer
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+      - mongodb
 
 
 #  api:
