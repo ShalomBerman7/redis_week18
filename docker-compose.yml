@@ -36,16 +36,16 @@ services:
       - mongodb
 
 
-#  api:
-#    build: analytics-api
-#    ports:
-#      - "8000:8000"
-#    environment:
-#      - MONGO_URI=mongodb://mongodb:27017
-#      - REDIS_HOST=redis
-#    depends_on:
-#      - mongodb
-#      - redis
+  api:
+    build: analytics-api
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017
+      - REDIS_HOST=redis
+    depends_on:
+      - mongodb
+      - redis
 
 
 volumes:
