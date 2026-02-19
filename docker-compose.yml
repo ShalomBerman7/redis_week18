@@ -1,0 +1,52 @@
+services:
+
+#  mongodb:
+#    image: mongo:7
+#    ports:
+#      - "27017:27017"
+#    volumes:
+#      - mongo_data:/data/db
+#    environment:
+#      MONGO_DB:
+
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+
+  producer:
+    build: producer
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+
+#  consumer:
+#    build: consumer
+#    environment:
+#      - MONGO_URI=mongodb://mongodb:27017
+#      - REDIS_HOST=redis
+#    depends_on:
+#      - redis
+
+
+#  api:
+#    build: analytics-api
+#    ports:
+#      - "8000:8000"
+#    environment:
+#      - MONGO_URI=mongodb://mongodb:27017
+#      - REDIS_HOST=redis
+#    depends_on:
+#      - mongodb
+#      - redis
+
+
+volumes:
+  mongo_data:
+  redis_data:
